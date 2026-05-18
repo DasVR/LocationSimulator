@@ -56,10 +56,9 @@ jobs:
             -project LocationSimulator.xcodeproj \
             -scheme LocationSimulator \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            ONLY_ACTIVE_ARCH=NO \
+            ONLY_ACTIVE_ARCH=YES \
             build \
             | tee build.log
         timeout-minutes: 10
