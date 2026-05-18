@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     name: Build and Test
-    runs-on: macos-latest
+    runs-on: macos-14
     timeout-minutes: 20
 
     steps:
@@ -49,7 +49,7 @@ jobs:
           cp project-ci.yml project.yml
           test -f project.yml || (echo "Missing project.yml"; exit 1)
 
-          xcodegen generate
+          xcodegen generate --quiet
           echo "status=success" >> "$GITHUB_OUTPUT"
 
           echo "--- Generated project contents ---"
