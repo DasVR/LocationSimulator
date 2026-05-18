@@ -44,7 +44,7 @@ targets:
       - sdk: UniformTypeIdentifiers.framework
 
   LocationSimulatorVPN:
-    type: application.extension
+    type: app-extension
     platform: iOS
     deploymentTarget: "17.4"
     sources:
@@ -53,6 +53,12 @@ targets:
     entitlements:
       path: LocationSimulator/VPN/VPNExtension.entitlements
       group: VPN
+    info:
+      path: LocationSimulator/VPN/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.networkextension.packet-tunnel
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).PacketTunnelProvider
     dependencies:
       - sdk: NetworkExtension.framework
 
