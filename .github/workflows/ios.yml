@@ -55,7 +55,7 @@ jobs:
           xcodebuild \
             -project LocationSimulator.xcodeproj \
             -scheme LocationSimulator \
-            -destination 'platform=iOS Simulator' \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
