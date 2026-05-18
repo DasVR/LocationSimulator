@@ -102,12 +102,12 @@ final class IDeviceService: ObservableObject {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("rp_pairing_file.plist")
         let data = try Data(contentsOf: url)
-        var handle: OpaquePointer?
+        var handle: RpPairingFileHandle?
         let err = data.withUnsafeBytes { bytes in
             guard let baseAddress = bytes.bindMemory(to: UInt8.self).baseAddress else {
-                return UnsafePointer<IdeviceFfiError>(bitPattern: 1)
+                return rp_pairing_file_from_bytes(nil, 0, nil)
             }
-            return rp_pairing_file_from_bytes(baseAddress, data.count, &handle)
+            return rp_pairing_file_from_bytes(baseAddress, UInt(data.count), &handle)
         }
         if let err = err {
             let msg = String(cString: err.pointee.message)

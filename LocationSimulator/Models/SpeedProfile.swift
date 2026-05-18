@@ -1,4 +1,4 @@
-enum SpeedProfile: CaseIterable {
+enum SpeedProfile: Hashable, CaseIterable {
     case walking
     case biking
     case driving
