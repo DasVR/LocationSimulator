@@ -55,10 +55,6 @@ targets:
       group: VPN
     info:
       path: LocationSimulator/VPN/Info.plist
-      properties:
-        NSExtension:
-          NSExtensionPointIdentifier: com.apple.networkextension.packet-tunnel
-          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).PacketTunnelProvider
     dependencies:
       - sdk: NetworkExtension.framework
 
