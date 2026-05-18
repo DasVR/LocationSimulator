@@ -43,41 +43,11 @@ jobs:
           bash LocationSimulator/scripts/download-libidevice.sh
 
       - name: Generate Xcode project
-        id: generate
         run: |
-          test -f project.yml || (echo "Missing project.yml"; exit 1)
-
-          # Try xcodegen with a 90-second timeout. If it hangs (VPN extension issue),
-          # fall back to a project without the VPN extension.
-          if timeout 90 xcodegen generate; then
-            echo "status=success" >> "$GITHUB_OUTPUT"
-            echo "xcodegen completed successfully"
-          else
-            echo "xcodegen timed out or failed — removing VPN extension and retrying"
-            ruby -e '
-              lines = File.readlines("project.yml")
-              output = []
-              skip = false
-              lines.each do |line|
-                if line.strip == "LocationSimulatorVPN:"
-                  skip = true
-                  next
-                end
-                if skip && line =~ /^\s{2}\w/
-                  skip = false
-                end
-                next if skip
-                # Also remove the embedded target reference
-                next if line.include?("target: LocationSimulatorVPN")
-                next if line.include?("embed: true") && output.last&.include?("LocationSimulatorVPN")
-                output << line
-              end
-              File.write("project.yml", output.join)
-            '
-            xcodegen generate
-            echo "status=fallback" >> "$GITHUB_OUTPUT"
-          fi
-
+          # Use CI-specific project file (no VPN extension) to avoid xcodegen hang.
+          # The full project with VPN extension is in project.yml for local Xcode use.
+          cp project-ci.yml project.yml
+          xcodegen generate
           echo "--- Generated project contents ---"
           ls -la LocationSimulator.xcodeproj/
 
