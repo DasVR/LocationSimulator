@@ -5,12 +5,13 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-test:
-    name: Build and Test
+    name: Build, Test, and Release
     runs-on: macos-14
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout repository
@@ -24,36 +25,15 @@ jobs:
       - name: List available simulators
         run: xcrun simctl list devices available | head -30
 
-      - name: Cache Homebrew packages
-        uses: actions/cache@v4
-        with:
-          path: ~/Library/Caches/Homebrew
-          key: ${{ runner.os }}-xcodegen-${{ hashFiles('project.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-xcodegen-
-
-      - name: Install xcodegen
+      - name: Verify Xcode project exists
         run: |
-          if ! command -v xcodegen &> /dev/null; then
-            brew install xcodegen
-          fi
+          test -d LocationSimulator.xcodeproj || (echo "Missing .xcodeproj"; exit 1)
+          grep -q "LocationSimulatorVPN" LocationSimulator.xcodeproj/project.pbxproj || \
+            (echo "VPN extension missing from project"; exit 1)
+          echo "LocationSimulator.xcodeproj verified (includes VPN extension)"
 
       - name: Download libidevice xcframework
-        run: |
-          bash LocationSimulator/scripts/download-libidevice.sh
-
-      - name: Generate Xcode project
-        id: generate
-        run: |
-          # Use the CI-safe project file (no VPN extension — xcodegen hangs on it)
-          cp project-ci.yml project.yml
-          test -f project.yml || (echo "Missing project.yml"; exit 1)
-
-          xcodegen generate --quiet
-          echo "status=success" >> "$GITHUB_OUTPUT"
-
-          echo "--- Generated project contents ---"
-          ls -la LocationSimulator.xcodeproj/
+        run: bash LocationSimulator/scripts/download-libidevice.sh
 
       - name: Build (Simulator)
         run: |
@@ -70,6 +50,7 @@ jobs:
         timeout-minutes: 10
 
       - name: Build (Device) and Package IPA
+        id: build_ipa
         run: |
           set -o pipefail
 
@@ -104,6 +85,27 @@ jobs:
 
           echo "Found app at: $APP_PATH"
 
+          # Find the built VPN extension
+          EXT_PATH=$(find ~/Library/Developer/Xcode/DerivedData \
+            -name "LocationSimulatorVPN.appex" \
+            -path "*/Build/Products/Release-iphoneos/*" 2>/dev/null | head -1)
+
+          if [ -z "$EXT_PATH" ]; then
+            echo "Looking for VPN extension in Debug-iphoneos..."
+            EXT_PATH=$(find ~/Library/Developer/Xcode/DerivedData \
+              -name "LocationSimulatorVPN.appex" \
+              -path "*/Build/Products/Debug-iphoneos/*" 2>/dev/null | head -1)
+          fi
+
+          if [ -n "$EXT_PATH" ]; then
+            echo "Found VPN extension at: $EXT_PATH"
+            mkdir -p "$APP_PATH/PlugIns"
+            cp -R "$EXT_PATH" "$APP_PATH/PlugIns/"
+            echo "VPN extension copied into app bundle"
+          else
+            echo "WARNING: VPN extension not found"
+          fi
+
           # Package as IPA
           mkdir -p Payload
           cp -R "$APP_PATH" Payload/
@@ -111,6 +113,8 @@ jobs:
           rm -rf Payload
 
           ls -lh LocationSimulator.ipa
+          echo "ipa_path=LocationSimulator.ipa" >> "$GITHUB_OUTPUT"
+          echo "ipa_size=$(stat -f%z LocationSimulator.ipa 2>/dev/null || stat -c%s LocationSimulator.ipa)" >> "$GITHUB_OUTPUT"
 
       - name: Upload IPA
         if: github.ref == 'refs/heads/main'
@@ -128,3 +132,43 @@ jobs:
             build.log
             device-build.log
             *.log
+
+  release:
+    name: Create GitHub Release
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download IPA artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LocationSimulator-unsigned
+          path: ./
+
+      - name: Get short SHA
+        id: vars
+        run: echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Latest Build (${{ steps.vars.outputs.sha_short }})"
+          body: |
+            Automated build of LocationSimulator with VPN extension.
+
+            - **Version**: ${{ steps.vars.outputs.sha_short }}
+            - **Date**: ${{ github.event.head_commit.timestamp }}
+            - **Commit**: ${{ github.sha }}
+
+            This IPA is **unsigned**. Install it via [SideStore](https://sidestore.io) or [AltStore](https://altstore.io).
+            See [DISTRIBUTION.md](https://github.com/${{ github.repository }}/blob/main/LocationSimulator/DISTRIBUTION.md) for installation instructions.
+          files: LocationSimulator.ipa
+          make_latest: true
+          draft: false
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
