@@ -23,6 +23,7 @@ targets:
         SWIFT_VERSION: "5.9"
         PRODUCT_NAME: LocationSimulator
         INFOPLIST_FILE: LocationSimulator/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.locationsimulator
     dependencies:
       - sdk: SwiftUI.framework
       - sdk: MapKit.framework
@@ -48,6 +49,7 @@ targets:
         SWIFT_VERSION: "5.9"
         PRODUCT_NAME: LocationSimulatorVPN
         INFOPLIST_FILE: LocationSimulator/VPN/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.locationsimulator.vpn
     dependencies:
       - sdk: NetworkExtension.framework
 

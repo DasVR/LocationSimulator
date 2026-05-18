@@ -493,6 +493,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.locationsimulator.vpn;
 				PRODUCT_NAME = LocationSimulatorVPN;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
@@ -516,6 +517,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.locationsimulator;
 				PRODUCT_NAME = LocationSimulator;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
@@ -617,6 +619,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.locationsimulator;
 				PRODUCT_NAME = LocationSimulator;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
@@ -635,6 +638,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.locationsimulator.vpn;
 				PRODUCT_NAME = LocationSimulatorVPN;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
