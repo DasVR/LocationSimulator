@@ -19,9 +19,6 @@ targets:
     settings:
       base:
         SWIFT_VERSION: "5.9"
-        LIBRARY_SEARCH_PATHS: "$(inherited) $(PROJECT_DIR)/LocationSimulator/idevice"
-        OTHER_LDFLAGS: "-lidevice"
-        SWIFT_INCLUDE_PATHS: "$(PROJECT_DIR)/LocationSimulator/idevice"
     dependencies:
       - sdk: SwiftUI.framework
       - sdk: MapKit.framework
@@ -29,6 +26,7 @@ targets:
       - sdk: AVFoundation.framework
       - sdk: NetworkExtension.framework
       - sdk: UniformTypeIdentifiers.framework
+      - framework: LocationSimulator/idevice/IDevice.xcframework
 
   LocationSimulatorTests:
     type: bundle.unit-test
