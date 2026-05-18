@@ -45,11 +45,11 @@ final class BackgroundLocationManager: NSObject, CLLocationManagerDelegate, Obse
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // No-op; we only need the keep-alive side effect
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // No-op; background updates may fail when the app is suspended
     }
 }

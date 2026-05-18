@@ -13,9 +13,14 @@ final class BackgroundOrchestrator: ObservableObject {
     private let locationManager: BackgroundLocationManager
     private let audioManager: BackgroundAudioManager
 
+    init() {
+        self.locationManager = BackgroundLocationManager()
+        self.audioManager = BackgroundAudioManager()
+    }
+
     init(
-        locationManager: BackgroundLocationManager = BackgroundLocationManager(),
-        audioManager: BackgroundAudioManager = BackgroundAudioManager()
+        locationManager: BackgroundLocationManager,
+        audioManager: BackgroundAudioManager
     ) {
         self.locationManager = locationManager
         self.audioManager = audioManager
