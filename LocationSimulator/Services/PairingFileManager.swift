@@ -82,7 +82,7 @@ final class PairingFileManager: ObservableObject {
                 if access { sourceURL.stopAccessingSecurityScopedResource() }
             }
             let plistData = try Data(contentsOf: sourceURL)
-            try self.validatePairingFile(data: plistData)
+            try await self.validatePairingFile(data: plistData)
             return plistData
         }.value
 

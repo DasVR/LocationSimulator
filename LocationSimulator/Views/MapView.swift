@@ -85,7 +85,7 @@ struct MapView: View {
     }
 
     private func mapContent(proxy: MapProxy) -> some View {
-        Map(position: $cameraPosition, showsUserLocation: true) {
+        Map(position: $cameraPosition) {
                 // MARK: - Pins
                 ForEach(viewModel.pins) { pin in
                     if case .start = pin.type {
@@ -104,10 +104,10 @@ struct MapView: View {
                         // Traffic control influence radius
                         MapCircle(
                             center: pin.coordinate,
-                            radius: controlType == .stopSign ? 20.0 : 15.0
+                            radius: if case .stopSign = controlType { 20.0 } else { 15.0 }
                         )
                         .foregroundStyle(
-                            (controlType == .stopSign ? Color.red : Color.yellow).opacity(0.3)
+                            (if case .stopSign = controlType { Color.red } else { Color.yellow }).opacity(0.3)
                         )
                     }
                 }

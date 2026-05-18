@@ -94,7 +94,7 @@ class MapViewModel {
         defer { isGeneratingRoute = false }
 
         do {
-            let service = OSRMRouteService()
+            let service = try OSRMRouteService()
             let response = try await service.fetchRoute(from: start, to: end, profile: profile)
             guard let geometry = response.routes.first?.geometry else {
                 routingError = "No route geometry found."
