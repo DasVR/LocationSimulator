@@ -1,7 +1,5 @@
 name: LocationSimulator
 createIntermediateGroups: true
-fileGroups:
-  - LocationSimulator/scripts
 
 targets:
   LocationSimulator:
@@ -10,25 +8,16 @@ targets:
     deploymentTarget: "17.4"
     sources:
       - path: LocationSimulator/App
-        group: App
       - path: LocationSimulator/Views
-        group: Views
       - path: LocationSimulator/ViewModels
-        group: ViewModels
       - path: LocationSimulator/Models
-        group: Models
       - path: LocationSimulator/Services
-        group: Services
       - path: LocationSimulator/idevice
-        group: idevice
     resources:
       - path: LocationSimulator/Resources/Config.plist
-        group: Resources
       - path: LocationSimulator/Info.plist
-        group: Resources
     entitlements:
       path: LocationSimulator/LocationSimulator.entitlements
-      group: Resources
     settings:
       base:
         SWIFT_VERSION: "5.9"
@@ -41,7 +30,6 @@ targets:
       - sdk: UniformTypeIdentifiers.framework
       - framework: LocationSimulator/idevice/IDevice.xcframework
       - target: LocationSimulatorVPN
-        embed: true
 
   LocationSimulatorVPN:
     type: app-extension
@@ -49,10 +37,8 @@ targets:
     deploymentTarget: "17.4"
     sources:
       - path: LocationSimulator/VPN/PacketTunnelProvider.swift
-        group: VPN
     entitlements:
       path: LocationSimulator/VPN/VPNExtension.entitlements
-      group: VPN
     dependencies:
       - sdk: NetworkExtension.framework
 
@@ -62,6 +48,5 @@ targets:
     deploymentTarget: "17.4"
     sources:
       - path: LocationSimulatorTests
-        group: LocationSimulatorTests
     dependencies:
       - target: LocationSimulator

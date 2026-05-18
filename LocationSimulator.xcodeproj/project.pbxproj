@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02F48733DE5152054D4EEC25 /* DebugOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3853CAB04FA55761C12B2D76 /* DebugOverlayView.swift */; };
+		03F813F6D9559AB0DC0D8699 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F856BEB3B5322B727C08EDBB /* AVFoundation.framework */; };
+		085B50F21039DF6705B360B4 /* PairingFileImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651E7DDCDC6DA56F79BD5178 /* PairingFileImportView.swift */; };
+		09ADD6E0C6187C111CA7F704 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EB317B3D1B083E0E8971B7 /* UniformTypeIdentifiers.framework */; };
+		09AEA97E49E528FD302A94E2 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6044AB7A37CD841F72D529F5 /* MapPin.swift */; };
+		0B2F1508B3F9DF2ACD21964F /* GPXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E012D7E7D40B1EE208242 /* GPXTests.swift */; };
+		1052C8504F96E6F4C2BF7B59 /* BackgroundOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1683E9642BA57B3840E033C5 /* BackgroundOrchestrator.swift */; };
+		123EEAA7DD99EBB86B23A080 /* LocationSimulatorVPN.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C1E95A5C6135BD8F16AE4663 /* LocationSimulatorVPN.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		12D80F7D7F333674F0EC23D3 /* SpeedProfileEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17562544C6FBB27DEF6D0FE /* SpeedProfileEngine.swift */; };
+		17CBFF3DEA9AB2851C343554 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04126FBC6B7001DC1EDE937 /* MapKit.framework */; };
+		266F2F9CFFBEE69AF3BAD9E9 /* RoutePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8074D15552446179D4FC6E48 /* RoutePlayer.swift */; };
+		28D048DF3AFFA03701477954 /* LocationSimulatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0673A2C88AC5792FD733B67 /* LocationSimulatorApp.swift */; };
+		2AA9E12BF3268B9F6C4B8572 /* RouteSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D70A371A13CF8C8D7DF890 /* RouteSegment.swift */; };
+		2B1971C0403F088DC38F69D3 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4178C10EB193FCD84A1F8D9A /* MapViewModel.swift */; };
+		2C8CF0E5AC2465ADF6826F13 /* OSRMRouteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5A6702EB199B112F762CD6 /* OSRMRouteServiceTests.swift */; };
+		30C5334EAE8D2ABFED37F48B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917445E5352081CD2E7E373E /* SwiftUI.framework */; };
+		35F5319DA42040895A43DD46 /* TrafficControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E36369A063A3425174A03 /* TrafficControl.swift */; };
+		3F4BE075990CDE39D2929963 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0A25FE0FEFB537719441ED /* VPNManager.swift */; };
+		4535A0361B9BF8014A172588 /* IDevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC2D1A94E7D943FFB348524 /* IDevice.xcframework */; };
+		539560F9A3EA8228F396A777 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031C053BD78CE105CA7B68F /* ModelsTests.swift */; };
+		5B04DD09EA2C8C7FB58D17A7 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0606780BF962E741E7297C8E /* NetworkExtension.framework */; };
+		624457F076D6C70F4B189182 /* TransparencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A8CAF4BBE57D6CE0E9B50 /* TransparencyView.swift */; };
+		6980F6B11D44E25AFF2C406E /* BackgroundAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE46A25E53821622005474F /* BackgroundAudioManager.swift */; };
+		755A923BCBF53962EDDD2A57 /* IDevice.xcframework in Resources */ = {isa = PBXBuildFile; fileRef = 08A2AC96009F0759EAA9DD9A /* IDevice.xcframework */; };
+		79289B7CE04A8996221C8F33 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D18EBC03CB94154F1D9E7A /* PacketTunnelProvider.swift */; };
+		86CB5EABF751CEC395739C1E /* TimedRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C992B0A87CD5A115A4F932 /* TimedRoute.swift */; };
+		8D760C3F1A36463482CBF5D4 /* TrafficControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682722915374FAFDF566DD26 /* TrafficControlTests.swift */; };
+		90DD31D26DA625EFEEEDA324 /* RoutePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926AAA710C86BE45287AA8F /* RoutePlayerTests.swift */; };
+		9681E30A20D55775A393BED0 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0606780BF962E741E7297C8E /* NetworkExtension.framework */; };
+		982C6F5CA37B01FF919D502E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D401F6C0677C7EB461CD94B8 /* CoreLocation.framework */; };
+		9CF98426F9726C49636D9142 /* OSRMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E3DA792DF1032325203924 /* OSRMService.swift */; };
+		A201B66254F4F61C109EFBBA /* LocationSimService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C45793A56852689C72752 /* LocationSimService.swift */; };
+		A3D66F6BA5A4A2808C47101C /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5134E42281E2FC6394D41C3 /* BackgroundLocationManager.swift */; };
+		A4A928723EDF84D4F47240BC /* GPXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068D1B388577A5E525F3AEE4 /* GPXParser.swift */; };
+		C1E39601167008B67A2DD637 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E803B3349605486DF4CE041A /* MapView.swift */; };
+		C7A2C592E1A55F3F18AF1DB3 /* SpeedProfileEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B24229A19EF3454C29782 /* SpeedProfileEngineTests.swift */; };
+		CE23DBA6F6E05889A809228B /* PairingFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F46C2B7D22E0F7E935B1432 /* PairingFileManager.swift */; };
+		D042A312293EC2D3260199FA /* SpeedProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29296F9AE43F561E535ABD27 /* SpeedProfile.swift */; };
+		E0D00774DB920257F1873C1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6581F3B31E964DCCCF88CECC /* ContentView.swift */; };
+		E180B0BFA62951B7DF87389C /* OSRMModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E2AD60C20979B188315B28 /* OSRMModels.swift */; };
+		F00AE14D1A9C9908D4922BFD /* GPXExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F065D9F62034DF0F6CA7FC /* GPXExporter.swift */; };
+		F15870C92AAEE3EA3B46655D /* SpeedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB8CC53BC9E78FAF6F4A3E /* SpeedGradient.swift */; };
+		F2FB060BF28F17EBBB845612 /* IDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7627BE969A09CF0F096EE8 /* IDeviceService.swift */; };
+		F96B762247865D319FA30667 /* IDevice.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC2D1A94E7D943FFB348524 /* IDevice.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D5EA1AF369F91B8038CC8D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA92766FEC8F98EF53F692E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9867FD5AB36B5CB15D338490;
+			remoteInfo = LocationSimulator;
+		};
+		ECFFDA0264E62D049EDE054C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA92766FEC8F98EF53F692E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1F36B9DA40CD6EA9F1074D7;
+			remoteInfo = LocationSimulatorVPN;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EBF8441C36B2D8AF9961F342 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				123EEAA7DD99EBB86B23A080 /* LocationSimulatorVPN.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5C0A0F8D2EC6E9F98314D88 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F96B762247865D319FA30667 /* IDevice.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0606780BF962E741E7297C8E /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		068D1B388577A5E525F3AEE4 /* GPXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXParser.swift; sourceTree = "<group>"; };
+		08A2AC96009F0759EAA9DD9A /* IDevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IDevice.xcframework; sourceTree = "<group>"; };
+		100A8CAF4BBE57D6CE0E9B50 /* TransparencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparencyView.swift; sourceTree = "<group>"; };
+		1683E9642BA57B3840E033C5 /* BackgroundOrchestrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundOrchestrator.swift; sourceTree = "<group>"; };
+		1926AAA710C86BE45287AA8F /* RoutePlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePlayerTests.swift; sourceTree = "<group>"; };
+		22F065D9F62034DF0F6CA7FC /* GPXExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXExporter.swift; sourceTree = "<group>"; };
+		29296F9AE43F561E535ABD27 /* SpeedProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedProfile.swift; sourceTree = "<group>"; };
+		31E2AD60C20979B188315B28 /* OSRMModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSRMModels.swift; sourceTree = "<group>"; };
+		3853CAB04FA55761C12B2D76 /* DebugOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOverlayView.swift; sourceTree = "<group>"; };
+		3EC2D1A94E7D943FFB348524 /* IDevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IDevice.xcframework; path = LocationSimulator/idevice/IDevice.xcframework; sourceTree = "<group>"; };
+		4178C10EB193FCD84A1F8D9A /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		4EE46A25E53821622005474F /* BackgroundAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundAudioManager.swift; sourceTree = "<group>"; };
+		4F008FF77F0BAFC8FF2CF4C2 /* LocationSimulatorTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LocationSimulatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56C992B0A87CD5A115A4F932 /* TimedRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedRoute.swift; sourceTree = "<group>"; };
+		5F46C2B7D22E0F7E935B1432 /* PairingFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingFileManager.swift; sourceTree = "<group>"; };
+		6044AB7A37CD841F72D529F5 /* MapPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
+		651E7DDCDC6DA56F79BD5178 /* PairingFileImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingFileImportView.swift; sourceTree = "<group>"; };
+		6581F3B31E964DCCCF88CECC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		671E36369A063A3425174A03 /* TrafficControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficControl.swift; sourceTree = "<group>"; };
+		682722915374FAFDF566DD26 /* TrafficControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficControlTests.swift; sourceTree = "<group>"; };
+		6B8C45793A56852689C72752 /* LocationSimService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSimService.swift; sourceTree = "<group>"; };
+		78EB317B3D1B083E0E8971B7 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		7A0A25FE0FEFB537719441ED /* VPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNManager.swift; sourceTree = "<group>"; };
+		8074D15552446179D4FC6E48 /* RoutePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePlayer.swift; sourceTree = "<group>"; };
+		86D18EBC03CB94154F1D9E7A /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		917445E5352081CD2E7E373E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9B3B24229A19EF3454C29782 /* SpeedProfileEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedProfileEngineTests.swift; sourceTree = "<group>"; };
+		A606713C2D10C903530E8EBA /* LocationSimulator.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LocationSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA5A6702EB199B112F762CD6 /* OSRMRouteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSRMRouteServiceTests.swift; sourceTree = "<group>"; };
+		BACB8CC53BC9E78FAF6F4A3E /* SpeedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedGradient.swift; sourceTree = "<group>"; };
+		C04126FBC6B7001DC1EDE937 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C1E95A5C6135BD8F16AE4663 /* LocationSimulatorVPN.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = LocationSimulatorVPN.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4E3DA792DF1032325203924 /* OSRMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSRMService.swift; sourceTree = "<group>"; };
+		D06E012D7E7D40B1EE208242 /* GPXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXTests.swift; sourceTree = "<group>"; };
+		D3BC985AE7D9B7B661D4AEFA /* .gitkeep */ = {isa = PBXFileReference; path = .gitkeep; sourceTree = "<group>"; };
+		D401F6C0677C7EB461CD94B8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E803B3349605486DF4CE041A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		E8D70A371A13CF8C8D7DF890 /* RouteSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSegment.swift; sourceTree = "<group>"; };
+		EB7627BE969A09CF0F096EE8 /* IDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDeviceService.swift; sourceTree = "<group>"; };
+		F031C053BD78CE105CA7B68F /* ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
+		F0673A2C88AC5792FD733B67 /* LocationSimulatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSimulatorApp.swift; sourceTree = "<group>"; };
+		F17562544C6FBB27DEF6D0FE /* SpeedProfileEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedProfileEngine.swift; sourceTree = "<group>"; };
+		F5134E42281E2FC6394D41C3 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
+		F856BEB3B5322B727C08EDBB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		35F4656FC2B0ADD2BA31229C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30C5334EAE8D2ABFED37F48B /* SwiftUI.framework in Frameworks */,
+				17CBFF3DEA9AB2851C343554 /* MapKit.framework in Frameworks */,
+				982C6F5CA37B01FF919D502E /* CoreLocation.framework in Frameworks */,
+				03F813F6D9559AB0DC0D8699 /* AVFoundation.framework in Frameworks */,
+				9681E30A20D55775A393BED0 /* NetworkExtension.framework in Frameworks */,
+				09ADD6E0C6187C111CA7F704 /* UniformTypeIdentifiers.framework in Frameworks */,
+				4535A0361B9BF8014A172588 /* IDevice.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0450B0847834371C084A61C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B04DD09EA2C8C7FB58D17A7 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F93CDD72C66056C85666FC3 /* VPN */ = {
+			isa = PBXGroup;
+			children = (
+				86D18EBC03CB94154F1D9E7A /* PacketTunnelProvider.swift */,
+			);
+			name = VPN;
+			path = LocationSimulator/VPN;
+			sourceTree = "<group>";
+		};
+		3F1E1F4E6DB8816C985A9FD6 /* LocationSimulatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				D06E012D7E7D40B1EE208242 /* GPXTests.swift */,
+				F031C053BD78CE105CA7B68F /* ModelsTests.swift */,
+				AA5A6702EB199B112F762CD6 /* OSRMRouteServiceTests.swift */,
+				1926AAA710C86BE45287AA8F /* RoutePlayerTests.swift */,
+				9B3B24229A19EF3454C29782 /* SpeedProfileEngineTests.swift */,
+				682722915374FAFDF566DD26 /* TrafficControlTests.swift */,
+			);
+			path = LocationSimulatorTests;
+			sourceTree = "<group>";
+		};
+		64EBE302640367B2BFF377EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4178C10EB193FCD84A1F8D9A /* MapViewModel.swift */,
+			);
+			name = ViewModels;
+			path = LocationSimulator/ViewModels;
+			sourceTree = "<group>";
+		};
+		757355F06076B393BF97A78B /* idevice */ = {
+			isa = PBXGroup;
+			children = (
+				D3BC985AE7D9B7B661D4AEFA /* .gitkeep */,
+				08A2AC96009F0759EAA9DD9A /* IDevice.xcframework */,
+			);
+			name = idevice;
+			path = LocationSimulator/idevice;
+			sourceTree = "<group>";
+		};
+		77E7F943203AF6CB38C4F028 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A606713C2D10C903530E8EBA /* LocationSimulator.app */,
+				4F008FF77F0BAFC8FF2CF4C2 /* LocationSimulatorTests.xctest */,
+				C1E95A5C6135BD8F16AE4663 /* LocationSimulatorVPN.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7FE47381E6B9171952613048 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4EE46A25E53821622005474F /* BackgroundAudioManager.swift */,
+				F5134E42281E2FC6394D41C3 /* BackgroundLocationManager.swift */,
+				1683E9642BA57B3840E033C5 /* BackgroundOrchestrator.swift */,
+				22F065D9F62034DF0F6CA7FC /* GPXExporter.swift */,
+				068D1B388577A5E525F3AEE4 /* GPXParser.swift */,
+				EB7627BE969A09CF0F096EE8 /* IDeviceService.swift */,
+				6B8C45793A56852689C72752 /* LocationSimService.swift */,
+				C4E3DA792DF1032325203924 /* OSRMService.swift */,
+				5F46C2B7D22E0F7E935B1432 /* PairingFileManager.swift */,
+				8074D15552446179D4FC6E48 /* RoutePlayer.swift */,
+				F17562544C6FBB27DEF6D0FE /* SpeedProfileEngine.swift */,
+				7A0A25FE0FEFB537719441ED /* VPNManager.swift */,
+			);
+			name = Services;
+			path = LocationSimulator/Services;
+			sourceTree = "<group>";
+		};
+		8257C6BF1A2DC4BDFD64A2C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F856BEB3B5322B727C08EDBB /* AVFoundation.framework */,
+				D401F6C0677C7EB461CD94B8 /* CoreLocation.framework */,
+				3EC2D1A94E7D943FFB348524 /* IDevice.xcframework */,
+				C04126FBC6B7001DC1EDE937 /* MapKit.framework */,
+				0606780BF962E741E7297C8E /* NetworkExtension.framework */,
+				917445E5352081CD2E7E373E /* SwiftUI.framework */,
+				78EB317B3D1B083E0E8971B7 /* UniformTypeIdentifiers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FCDE4A55C8B53C3323655AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6044AB7A37CD841F72D529F5 /* MapPin.swift */,
+				31E2AD60C20979B188315B28 /* OSRMModels.swift */,
+				E8D70A371A13CF8C8D7DF890 /* RouteSegment.swift */,
+				BACB8CC53BC9E78FAF6F4A3E /* SpeedGradient.swift */,
+				29296F9AE43F561E535ABD27 /* SpeedProfile.swift */,
+				56C992B0A87CD5A115A4F932 /* TimedRoute.swift */,
+				671E36369A063A3425174A03 /* TrafficControl.swift */,
+			);
+			name = Models;
+			path = LocationSimulator/Models;
+			sourceTree = "<group>";
+		};
+		A8F63CC0B19D77E20EB4F2ED /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F0673A2C88AC5792FD733B67 /* LocationSimulatorApp.swift */,
+			);
+			name = App;
+			path = LocationSimulator/App;
+			sourceTree = "<group>";
+		};
+		C379060A2BD0357A0EB159B3 = {
+			isa = PBXGroup;
+			children = (
+				A8F63CC0B19D77E20EB4F2ED /* App */,
+				757355F06076B393BF97A78B /* idevice */,
+				3F1E1F4E6DB8816C985A9FD6 /* LocationSimulatorTests */,
+				9FCDE4A55C8B53C3323655AD /* Models */,
+				7FE47381E6B9171952613048 /* Services */,
+				64EBE302640367B2BFF377EB /* ViewModels */,
+				E836F69613E277039D9920AB /* Views */,
+				0F93CDD72C66056C85666FC3 /* VPN */,
+				8257C6BF1A2DC4BDFD64A2C2 /* Frameworks */,
+				77E7F943203AF6CB38C4F028 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E836F69613E277039D9920AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6581F3B31E964DCCCF88CECC /* ContentView.swift */,
+				3853CAB04FA55761C12B2D76 /* DebugOverlayView.swift */,
+				E803B3349605486DF4CE041A /* MapView.swift */,
+				651E7DDCDC6DA56F79BD5178 /* PairingFileImportView.swift */,
+				100A8CAF4BBE57D6CE0E9B50 /* TransparencyView.swift */,
+			);
+			name = Views;
+			path = LocationSimulator/Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84A16C4A077ECDE20E9B1635 /* LocationSimulatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B45609B2782CDD7FDE388751 /* Build configuration list for PBXNativeTarget "LocationSimulatorTests" */;
+			buildPhases = (
+				1A3F0452B59EF55E30103FC4 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				667C050682918A8F7CDB74D3 /* PBXTargetDependency */,
+			);
+			name = LocationSimulatorTests;
+			packageProductDependencies = (
+			);
+			productName = LocationSimulatorTests;
+			productReference = 4F008FF77F0BAFC8FF2CF4C2 /* LocationSimulatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9867FD5AB36B5CB15D338490 /* LocationSimulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91EAFFB3942EFD48DA940586 /* Build configuration list for PBXNativeTarget "LocationSimulator" */;
+			buildPhases = (
+				C17E2AA9BCD0A566037534CB /* Sources */,
+				A091DAF0F07543C9882C0739 /* Resources */,
+				35F4656FC2B0ADD2BA31229C /* Frameworks */,
+				EBF8441C36B2D8AF9961F342 /* Embed Foundation Extensions */,
+				F5C0A0F8D2EC6E9F98314D88 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A276BF4FC59AEDB139EF4B63 /* PBXTargetDependency */,
+			);
+			name = LocationSimulator;
+			packageProductDependencies = (
+			);
+			productName = LocationSimulator;
+			productReference = A606713C2D10C903530E8EBA /* LocationSimulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E1F36B9DA40CD6EA9F1074D7 /* LocationSimulatorVPN */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F5B8A8837D37F2361686935 /* Build configuration list for PBXNativeTarget "LocationSimulatorVPN" */;
+			buildPhases = (
+				6505C7B6328D806534B99605 /* Sources */,
+				D0450B0847834371C084A61C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocationSimulatorVPN;
+			packageProductDependencies = (
+			);
+			productName = LocationSimulatorVPN;
+			productReference = C1E95A5C6135BD8F16AE4663 /* LocationSimulatorVPN.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6FA92766FEC8F98EF53F692E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 0F0C4D2204F5CDB0C7FC3550 /* Build configuration list for PBXProject "LocationSimulator" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C379060A2BD0357A0EB159B3;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 77E7F943203AF6CB38C4F028 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9867FD5AB36B5CB15D338490 /* LocationSimulator */,
+				84A16C4A077ECDE20E9B1635 /* LocationSimulatorTests */,
+				E1F36B9DA40CD6EA9F1074D7 /* LocationSimulatorVPN */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A091DAF0F07543C9882C0739 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				755A923BCBF53962EDDD2A57 /* IDevice.xcframework in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A3F0452B59EF55E30103FC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B2F1508B3F9DF2ACD21964F /* GPXTests.swift in Sources */,
+				539560F9A3EA8228F396A777 /* ModelsTests.swift in Sources */,
+				2C8CF0E5AC2465ADF6826F13 /* OSRMRouteServiceTests.swift in Sources */,
+				90DD31D26DA625EFEEEDA324 /* RoutePlayerTests.swift in Sources */,
+				C7A2C592E1A55F3F18AF1DB3 /* SpeedProfileEngineTests.swift in Sources */,
+				8D760C3F1A36463482CBF5D4 /* TrafficControlTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6505C7B6328D806534B99605 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79289B7CE04A8996221C8F33 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C17E2AA9BCD0A566037534CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6980F6B11D44E25AFF2C406E /* BackgroundAudioManager.swift in Sources */,
+				A3D66F6BA5A4A2808C47101C /* BackgroundLocationManager.swift in Sources */,
+				1052C8504F96E6F4C2BF7B59 /* BackgroundOrchestrator.swift in Sources */,
+				E0D00774DB920257F1873C1F /* ContentView.swift in Sources */,
+				02F48733DE5152054D4EEC25 /* DebugOverlayView.swift in Sources */,
+				F00AE14D1A9C9908D4922BFD /* GPXExporter.swift in Sources */,
+				A4A928723EDF84D4F47240BC /* GPXParser.swift in Sources */,
+				F2FB060BF28F17EBBB845612 /* IDeviceService.swift in Sources */,
+				A201B66254F4F61C109EFBBA /* LocationSimService.swift in Sources */,
+				28D048DF3AFFA03701477954 /* LocationSimulatorApp.swift in Sources */,
+				09AEA97E49E528FD302A94E2 /* MapPin.swift in Sources */,
+				C1E39601167008B67A2DD637 /* MapView.swift in Sources */,
+				2B1971C0403F088DC38F69D3 /* MapViewModel.swift in Sources */,
+				E180B0BFA62951B7DF87389C /* OSRMModels.swift in Sources */,
+				9CF98426F9726C49636D9142 /* OSRMService.swift in Sources */,
+				085B50F21039DF6705B360B4 /* PairingFileImportView.swift in Sources */,
+				CE23DBA6F6E05889A809228B /* PairingFileManager.swift in Sources */,
+				266F2F9CFFBEE69AF3BAD9E9 /* RoutePlayer.swift in Sources */,
+				2AA9E12BF3268B9F6C4B8572 /* RouteSegment.swift in Sources */,
+				F15870C92AAEE3EA3B46655D /* SpeedGradient.swift in Sources */,
+				D042A312293EC2D3260199FA /* SpeedProfile.swift in Sources */,
+				12D80F7D7F333674F0EC23D3 /* SpeedProfileEngine.swift in Sources */,
+				86CB5EABF751CEC395739C1E /* TimedRoute.swift in Sources */,
+				35F5319DA42040895A43DD46 /* TrafficControl.swift in Sources */,
+				624457F076D6C70F4B189182 /* TransparencyView.swift in Sources */,
+				3F4BE075990CDE39D2929963 /* VPNManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		667C050682918A8F7CDB74D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9867FD5AB36B5CB15D338490 /* LocationSimulator */;
+			targetProxy = 4D5EA1AF369F91B8038CC8D5 /* PBXContainerItemProxy */;
+		};
+		A276BF4FC59AEDB139EF4B63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1F36B9DA40CD6EA9F1074D7 /* LocationSimulatorVPN */;
+			targetProxy = ECFFDA0264E62D049EDE054C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2FCCD4E459460AC714FEBDD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LocationSimulator/VPN/VPNExtension.entitlements;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+			};
+			name = Release;
+		};
+		84848BFC4D2FEB84DB84D85F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LocationSimulator/LocationSimulator.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"LocationSimulator/idevice\"",
+				);
+				INFOPLIST_FILE = LocationSimulator/idevice/IDevice.xcframework/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		939EDCB93D3C53CAF53E6E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocationSimulator.app/LocationSimulator";
+			};
+			name = Debug;
+		};
+		99F0B2A6AE7DED8F611C4F0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AE6D781C5F912026EBF45863 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LocationSimulator/LocationSimulator.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"LocationSimulator/idevice\"",
+				);
+				INFOPLIST_FILE = LocationSimulator/idevice/IDevice.xcframework/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		BE431F9EDD20CF2BC911F079 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LocationSimulator/VPN/VPNExtension.entitlements;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+			};
+			name = Debug;
+		};
+		D9C06C1F76CF1D13B47A26CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		FB988EE62D99B92D4DFB7C71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocationSimulator.app/LocationSimulator";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F0C4D2204F5CDB0C7FC3550 /* Build configuration list for PBXProject "LocationSimulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99F0B2A6AE7DED8F611C4F0A /* Debug */,
+				D9C06C1F76CF1D13B47A26CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4F5B8A8837D37F2361686935 /* Build configuration list for PBXNativeTarget "LocationSimulatorVPN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE431F9EDD20CF2BC911F079 /* Debug */,
+				2FCCD4E459460AC714FEBDD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		91EAFFB3942EFD48DA940586 /* Build configuration list for PBXNativeTarget "LocationSimulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84848BFC4D2FEB84DB84D85F /* Debug */,
+				AE6D781C5F912026EBF45863 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B45609B2782CDD7FDE388751 /* Build configuration list for PBXNativeTarget "LocationSimulatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				939EDCB93D3C53CAF53E6E06 /* Debug */,
+				FB988EE62D99B92D4DFB7C71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6FA92766FEC8F98EF53F692E /* Project object */;
+}
