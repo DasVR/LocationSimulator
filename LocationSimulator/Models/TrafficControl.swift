@@ -1,4 +1,5 @@
 import CoreLocation
+import SwiftUI
 
 struct TrafficControl: Identifiable {
     let id = UUID()
@@ -51,4 +52,20 @@ enum TrafficControlType: Equatable {
 
     /// Alias for `displayName` to match `MapPin.label` usage.
     var label: String { displayName }
+
+    /// Radius of influence on the map (in meters).
+    var influenceRadius: Double {
+        switch self {
+        case .stopSign: return 20.0
+        case .trafficLight: return 15.0
+        }
+    }
+
+    /// Color used for the influence circle overlay.
+    var mapColor: Color {
+        switch self {
+        case .stopSign: return .red
+        case .trafficLight: return .yellow
+        }
+    }
 }

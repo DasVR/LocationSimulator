@@ -104,10 +104,10 @@ struct MapView: View {
                         // Traffic control influence radius
                         MapCircle(
                             center: pin.coordinate,
-                            radius: if case .stopSign = controlType { 20.0 } else { 15.0 }
+                            radius: controlType.influenceRadius
                         )
                         .foregroundStyle(
-                            (if case .stopSign = controlType { Color.red } else { Color.yellow }).opacity(0.3)
+                            controlType.mapColor.opacity(0.3)
                         )
                     }
                 }
