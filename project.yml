@@ -7,7 +7,7 @@ targets:
   LocationSimulator:
     type: application
     platform: iOS
-    deploymentTarget: "18.0"
+    deploymentTarget: "26.5"
     sources:
       - path: LocationSimulator/App
         group: App
@@ -46,7 +46,7 @@ targets:
   LocationSimulatorTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "18.0"
+    deploymentTarget: "26.5"
     sources:
       - path: LocationSimulatorTests
         group: LocationSimulatorTests
