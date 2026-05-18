@@ -1,4 +1,4 @@
-import idevice
+import IDevice
 import Foundation
 
 final class LocationSimService: ObservableObject {
@@ -16,8 +16,8 @@ final class LocationSimService: ObservableObject {
         }
         var handle: OpaquePointer?
         let err = location_simulation_new(server, &handle)
-        guard err == nil else {
-            throw IDeviceError.ffiError("Failed to create location simulation handle")
+        if let err = err {
+            throw IDeviceError.ffiError(String(cString: err.pointee.message))
         }
         self.simHandle = handle
     }
@@ -27,16 +27,16 @@ final class LocationSimService: ObservableObject {
             throw IDeviceError.ffiError("Simulation not started")
         }
         let err = location_simulation_set(handle, latitude, longitude)
-        guard err == nil else {
-            throw IDeviceError.ffiError("Failed to set location")
+        if let err = err {
+            throw IDeviceError.ffiError(String(cString: err.pointee.message))
         }
     }
 
     func clearLocation() throws {
         guard let handle = simHandle else { return }
         let err = location_simulation_clear(handle)
-        guard err == nil else {
-            throw IDeviceError.ffiError("Failed to clear location")
+        if let err = err {
+            throw IDeviceError.ffiError(String(cString: err.pointee.message))
         }
     }
 

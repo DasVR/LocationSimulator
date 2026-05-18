@@ -30,7 +30,11 @@ final class RoutePlayer: ObservableObject {
     // MARK: - Private State
 
     private var timedRoute: TimedRoute?
-    @Published var playbackMultiplier: Double = 1.0
+    @Published var playbackMultiplier: Double = 1.0 {
+        didSet {
+            playbackMultiplier = min(max(0.1, playbackMultiplier), 10.0)
+        }
+    }
     private var startTime: Date?
     private var pausedElapsed: TimeInterval = 0
     private var timer: Timer?

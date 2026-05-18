@@ -6,6 +6,8 @@ struct ContentView: View {
     @StateObject private var deviceService: IDeviceService
     @StateObject private var vpnManager: VPNManager
     @StateObject private var routePlayer: RoutePlayer
+    @StateObject private var backgroundOrchestrator: BackgroundOrchestrator
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         let ds = IDeviceService()
@@ -13,6 +15,7 @@ struct ContentView: View {
         _deviceService = StateObject(wrappedValue: ds)
         _vpnManager = StateObject(wrappedValue: VPNManager())
         _routePlayer = StateObject(wrappedValue: RoutePlayer(locationSimService: lss))
+        _backgroundOrchestrator = StateObject(wrappedValue: BackgroundOrchestrator())
     }
 
     var body: some View {
@@ -42,6 +45,18 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active {
+                if !deviceService.isConnected {
+                    deviceService.reconnect()
+                }
+                if !backgroundOrchestrator.isKeepingAlive {
+                    try? backgroundOrchestrator.start()
+                }
+            } else if newPhase == .background {
+                backgroundOrchestrator.stop()
+            }
+        }
     }
 }
 
@@ -60,12 +75,22 @@ struct SimulateTabView: View {
     @State private var isImporting = false
     @State private var isExporting = false
     @State private var selectedProfile: SpeedProfile = .driving
+    @State private var customSpeed: Double = 15.0
     @State private var importError: Error?
     @State private var showImportError = false
     @State private var exportData: Data?
     @State private var showNoRouteAlert = false
 
     private let engine = SpeedProfileEngine()
+
+    private var effectiveProfile: SpeedProfile {
+        switch selectedProfile {
+        case .custom:
+            return .custom(speed: customSpeed)
+        default:
+            return selectedProfile
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -82,6 +107,19 @@ struct SimulateTabView: View {
                             }
                         }
                         .pickerStyle(.segmented)
+
+                        if case .custom = selectedProfile {
+                            HStack {
+                                Text("Speed (m/s)")
+                                    .font(.subheadline)
+                                Spacer()
+                                TextField("Speed", value: $customSpeed, format: .number)
+                                    .keyboardType(.decimalPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(width: 80)
+                            }
+                            .padding(.horizontal)
+                        }
 
                         Button {
                             isImporting = true
@@ -189,7 +227,7 @@ struct SimulateTabView: View {
             let data = try Data(contentsOf: url)
             let coordinates = try GPXParser.parse(data: data)
 
-            let profile = selectedProfile
+            let profile = effectiveProfile
             let rp = routePlayer
             Task {
                 let timedRoute = await engine.computeTimedRoute(coordinates: coordinates, profile: profile)
@@ -215,14 +253,41 @@ struct SimulateTabView: View {
 }
 
 struct SettingsTabView: View {
+    @AppStorage("osrmBaseURL") private var osrmBaseURL: String = "https://router.project-osrm.org"
+    @AppStorage("speedUnit") private var speedUnit: String = "mph"
+    @State private var showClearCacheAlert = false
+
     var body: some View {
-        VStack {
-            Text("Settings")
-                .font(.largeTitle)
-                .padding()
-            Text("App configuration will appear here.")
-                .foregroundColor(.secondary)
-            Spacer()
+        NavigationStack {
+            Form {
+                Section("Server") {
+                    TextField("OSRM Base URL", text: $osrmBaseURL)
+                        .keyboardType(.URL)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                }
+
+                Section("Simulation") {
+                    Picker("Speed Unit", selection: $speedUnit) {
+                        Text("mph").tag("mph")
+                        Text("kph").tag("kph")
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                Section("Data") {
+                    Button("Clear Route Cache", role: .destructive) {
+                        showClearCacheAlert = true
+                    }
+                }
+            }
+            .navigationTitle("Settings")
+            .alert("Clear Cache?", isPresented: $showClearCacheAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Clear", role: .destructive) {}
+            } message: {
+                Text("This will clear all cached OSRM routes.")
+            }
         }
     }
 }

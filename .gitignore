@@ -19,3 +19,6 @@ rp_pairing_file.plist
 # Node / misc
 node_modules/
 *.log
+
+# Pre-built binaries (downloaded during setup)
+LocationSimulator/idevice/IDevice.xcframework/

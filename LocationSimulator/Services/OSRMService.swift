@@ -6,7 +6,7 @@ import CoreLocation
 actor OSRMRouteService {
     private let config: Config
     private var lastRequestTime: Date = .distantPast
-    private var cache: [String: OSRMRouteResponse] = [:]
+    private let cache = NSCache<NSString, OSRMRouteResponseWrapper>()
 
     /// Service configuration loaded from Config.plist.
     struct Config {
@@ -28,6 +28,14 @@ actor OSRMRouteService {
         }
     }
 
+    /// Wrapper class required because NSCache only stores reference types.
+    final class OSRMRouteResponseWrapper {
+        let response: OSRMRouteResponse
+        init(_ response: OSRMRouteResponse) {
+            self.response = response
+        }
+    }
+
     /// Errors that can occur during OSRM route fetching.
     enum OSRMError: Error {
         case invalidConfig
@@ -38,9 +46,16 @@ actor OSRMRouteService {
     }
 
     /// Creates the service. Requires Config.plist to be present in the main bundle.
-    /// - Throws: `OSRMError.invalidConfig` if Config.plist cannot be read.
-    init() throws {
-        self.config = try Config.fromPlist()
+    /// - Parameters:
+    ///   - baseURL: Optional override for the OSRM server URL. If nil, reads from Config.plist.
+    /// - Throws: `OSRMError.invalidConfig` if Config.plist cannot be read and no baseURL is provided.
+    init(baseURL: URL? = nil) throws {
+        if let baseURL = baseURL {
+            let plistConfig = try Config.fromPlist()
+            self.config = Config(baseURL: baseURL, rateLimit: plistConfig.rateLimit)
+        } else {
+            self.config = try Config.fromPlist()
+        }
     }
 
     /// Fetches a route between two coordinates using the specified OSRM profile.
@@ -57,9 +72,9 @@ actor OSRMRouteService {
         profile: OSRMProfile = .car
     ) async throws -> OSRMRouteResponse {
         // Check in-memory cache first to avoid unnecessary rate-limit delays.
-        let cacheKey = "\(from.latitude),\(from.longitude)-\(to.latitude),\(to.longitude)-\(profile.rawValue)"
-        if let cached = cache[cacheKey] {
-            return cached
+        let cacheKey = "\(from.latitude),\(from.longitude)-\(to.latitude),\(to.longitude)-\(profile.rawValue)" as NSString
+        if let cached = cache.object(forKey: cacheKey) {
+            return cached.response
         }
 
         // Rate limiting: ensure at least `config.rateLimit` seconds between requests.
@@ -127,7 +142,7 @@ actor OSRMRouteService {
             throw OSRMError.noRoute
         }
 
-        cache[cacheKey] = decoded
+        cache.setObject(OSRMRouteResponseWrapper(decoded), forKey: cacheKey)
         return decoded
     }
 

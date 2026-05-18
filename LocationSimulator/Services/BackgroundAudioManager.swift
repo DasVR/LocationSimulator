@@ -11,51 +11,62 @@ enum AudioError: Error {
 /// The audio session is configured with `.mixWithOthers` so that music and podcast apps
 /// are not interrupted. A periodic health-check timer recovers playback if another process
 /// interrupts the audio session.
-@MainActor
 final class BackgroundAudioManager: ObservableObject {
     private var engine: AVAudioEngine?
     private var player: AVAudioPlayerNode?
     private var healthCheckTimer: Timer?
+    private let audioQueue = DispatchQueue(label: "com.locoof.audio", qos: .utility)
 
     @Published var isActive = false
 
-    /// Starts the silent-audio engine and activates the audio session.
+    /// Starts the silent-audio engine and activates the audio session on a dedicated queue.
     ///
     /// - Throws: Errors from `AVAudioSession` category configuration, engine start, or format creation.
     func startSilence() throws {
         guard !isActive else { return }
+
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(.playback, options: .mixWithOthers)
         try session.setActive(true)
 
-        let engine = AVAudioEngine()
-        let player = AVAudioPlayerNode()
-        engine.attach(player)
+        audioQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                let engine = AVAudioEngine()
+                let player = AVAudioPlayerNode()
+                engine.attach(player)
 
-        guard let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1) else {
-            throw AudioError.formatCreationFailed
-        }
-        engine.connect(player, to: engine.mainMixerNode, format: format)
-        try engine.start()
+                guard let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1) else {
+                    throw AudioError.formatCreationFailed
+                }
+                engine.connect(player, to: engine.mainMixerNode, format: format)
+                try engine.start()
 
-        let frameCount: AVAudioFrameCount = 44100
-        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frameCount) else { return }
-        buffer.frameLength = frameCount
-        // Buffer is zero-initialized (silence)
+                let frameCount: AVAudioFrameCount = 44100
+                guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frameCount) else { return }
+                buffer.frameLength = frameCount
+                // Buffer is zero-initialized (silence)
 
-        player.scheduleBuffer(buffer, at: nil, options: .loops)
-        player.play()
+                player.scheduleBuffer(buffer, at: nil, options: .loops)
+                player.play()
 
-        self.engine = engine
-        self.player = player
-        self.isActive = true
+                self.engine = engine
+                self.player = player
 
-        healthCheckTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                guard let self = self, let player = self.player else { return }
-                if !player.isPlaying {
-                    player.scheduleBuffer(buffer, at: nil, options: .loops)
-                    player.play()
+                DispatchQueue.main.async {
+                    self.isActive = true
+                }
+
+                self.healthCheckTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+                    guard let self = self, let player = self.player else { return }
+                    if !player.isPlaying {
+                        player.scheduleBuffer(buffer, at: nil, options: .loops)
+                        player.play()
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isActive = false
                 }
             }
         }

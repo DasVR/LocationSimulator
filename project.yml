@@ -7,7 +7,7 @@ targets:
   LocationSimulator:
     type: application
     platform: iOS
-    deploymentTarget: "26.5"
+    deploymentTarget: "17.4"
     sources:
       - path: LocationSimulator/App
         group: App
@@ -32,9 +32,6 @@ targets:
     settings:
       base:
         SWIFT_VERSION: "5.9"
-        LIBRARY_SEARCH_PATHS: "$(inherited) $(PROJECT_DIR)/LocationSimulator/idevice"
-        OTHER_LDFLAGS: "-lidevice"
-        SWIFT_INCLUDE_PATHS: "$(PROJECT_DIR)/LocationSimulator/idevice"
     dependencies:
       - sdk: SwiftUI.framework
       - sdk: MapKit.framework
@@ -42,13 +39,34 @@ targets:
       - sdk: AVFoundation.framework
       - sdk: NetworkExtension.framework
       - sdk: UniformTypeIdentifiers.framework
+      - framework: LocationSimulator/idevice/IDevice.xcframework
+      - target: LocationSimulatorVPN
+        embed: true
 
   LocationSimulatorTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "26.5"
+    deploymentTarget: "17.4"
     sources:
       - path: LocationSimulatorTests
         group: LocationSimulatorTests
     dependencies:
       - target: LocationSimulator
+
+  LocationSimulatorVPN:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.4"
+    sources:
+      - path: LocationSimulator/VPN
+        group: VPN
+    info:
+      path: LocationSimulator/VPN/Info.plist
+    entitlements:
+      path: LocationSimulator/VPN/VPNExtension.entitlements
+      group: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.locoof.LocationSimulator.vpn
+    dependencies:
+      - sdk: NetworkExtension.framework

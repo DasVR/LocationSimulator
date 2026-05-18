@@ -1,4 +1,4 @@
-import idevice
+import IDevice
 import Foundation
 
 enum IDeviceError: Error {
@@ -9,10 +9,12 @@ enum IDeviceError: Error {
 
 final class IDeviceService: ObservableObject {
     @Published var isConnected = false
+    @Published var lastError: String?
     private var adapter: OpaquePointer?
     private var handshake: OpaquePointer?
     private(set) var remoteServer: OpaquePointer?
     private let port: UInt16 = 49152
+    private var reconnectTask: Task<Void, Never>?
 
     func connect(hostname: String = "10.7.0.1") throws {
         // If already connected, disconnect first to prevent handle leaks.
@@ -44,18 +46,19 @@ final class IDeviceService: ObservableObject {
                 )
             }
         }
-        guard ffiError == nil else {
-            throw IDeviceError.ffiError(String(cString: idevice_error_to_string(ffiError)))
+        if let err = ffiError {
+            let msg = String(cString: err.pointee.message)
+            throw IDeviceError.ffiError(msg)
         }
 
         // 3. Connect remote server
         var server: OpaquePointer?
         let serverErr = remote_server_connect_rsd(tunnelAdapter, tunnelHandshake, &server)
-        guard serverErr == nil else {
-            // Clean up tunnel resources before throwing
+        if let err = serverErr {
             if let hs = tunnelHandshake { rsd_handshake_free(hs) }
             if let ad = tunnelAdapter { adapter_free(ad) }
-            throw IDeviceError.ffiError(String(cString: idevice_error_to_string(serverErr)))
+            let msg = String(cString: err.pointee.message)
+            throw IDeviceError.ffiError(msg)
         }
 
         // 4. Only assign to ivars after all steps succeed atomically.
@@ -63,10 +66,31 @@ final class IDeviceService: ObservableObject {
         self.handshake = tunnelHandshake
         self.remoteServer = server
         self.isConnected = true
+        self.lastError = nil
+    }
+
+    /// Attempts to reconnect up to `maxAttempts` times with exponential backoff.
+    func reconnect(hostname: String = "10.7.0.1", maxAttempts: Int = 3) {
+        reconnectTask?.cancel()
+        reconnectTask = Task {
+            for attempt in 1...maxAttempts {
+                guard !Task.isCancelled else { return }
+                do {
+                    try connect(hostname: hostname)
+                    return
+                } catch {
+                    let delay = min(Double(attempt) * 2.0, 10.0)
+                    self.lastError = error.localizedDescription
+                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                }
+            }
+        }
     }
 
     func disconnect() {
-        if let server = remoteServer { remote_server_disconnect(server); remoteServer = nil }
+        reconnectTask?.cancel()
+        reconnectTask = nil
+        if let server = remoteServer { remote_server_free(server); remoteServer = nil }
         if let hs = handshake { rsd_handshake_free(hs); handshake = nil }
         if let ad = adapter { adapter_free(ad); adapter = nil }
         isConnected = false
@@ -81,11 +105,14 @@ final class IDeviceService: ObservableObject {
         var handle: OpaquePointer?
         let err = data.withUnsafeBytes { bytes in
             guard let baseAddress = bytes.bindMemory(to: UInt8.self).baseAddress else {
-                return idevice_error_t(bitPattern: 1) // synthetic error for null base
+                return UnsafePointer<IdeviceFfiError>(bitPattern: 1)
             }
             return rp_pairing_file_from_bytes(baseAddress, data.count, &handle)
         }
-        guard err == nil else { throw IDeviceError.ffiError("Invalid pairing file") }
+        if let err = err {
+            let msg = String(cString: err.pointee.message)
+            throw IDeviceError.ffiError(msg)
+        }
         guard let handle = handle else {
             throw IDeviceError.ffiError("Pairing file returned null handle")
         }
