@@ -5,4 +5,36 @@ targets:
     platform: iOS
     deploymentTarget: "17.4"
     sources:
-      - LocationSimulator
+      - path: LocationSimulator/App
+      - path: LocationSimulator/Views
+      - path: LocationSimulator/ViewModels
+      - path: LocationSimulator/Models
+      - path: LocationSimulator/Services
+      - path: LocationSimulator/idevice
+    resources:
+      - path: LocationSimulator/Resources/Config.plist
+      - path: LocationSimulator/Info.plist
+    entitlements:
+      path: LocationSimulator/LocationSimulator.entitlements
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        LIBRARY_SEARCH_PATHS: "$(inherited) $(PROJECT_DIR)/LocationSimulator/idevice"
+        OTHER_LDFLAGS: "-lidevice"
+        SWIFT_INCLUDE_PATHS: "$(PROJECT_DIR)/LocationSimulator/idevice"
+    dependencies:
+      - sdk: SwiftUI.framework
+      - sdk: MapKit.framework
+      - sdk: CoreLocation.framework
+      - sdk: AVFoundation.framework
+      - sdk: NetworkExtension.framework
+      - sdk: UniformTypeIdentifiers.framework
+
+  LocationSimulatorTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.4"
+    sources:
+      - path: LocationSimulatorTests
+    dependencies:
+      - target: LocationSimulator
