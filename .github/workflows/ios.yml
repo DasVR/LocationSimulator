@@ -44,13 +44,16 @@ jobs:
           echo "--- Schemes ---"
           ls -la LocationSimulator.xcodeproj/xcshareddata/xcschemes/ 2>/dev/null || echo "No shared schemes"
 
+      - name: List available simulators
+        run: xcrun simctl list devices available | head -20
+
       - name: Build (Simulator)
         run: |
           set -o pipefail
           xcodebuild \
             -project LocationSimulator.xcodeproj \
             -scheme LocationSimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -destination 'platform=iOS Simulator' \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
