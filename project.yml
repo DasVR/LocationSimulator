@@ -44,7 +44,7 @@ targets:
       - sdk: UniformTypeIdentifiers.framework
 
   LocationSimulatorVPN:
-    type: appExtension
+    type: application.extension
     platform: iOS
     deploymentTarget: "17.4"
     sources:
