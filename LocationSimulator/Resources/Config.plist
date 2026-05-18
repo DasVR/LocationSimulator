@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>OSRMBaseURL</key>
+    <string>https://router.project-osrm.org</string>
+    <key>OSRMRateLimit</key>
+    <real>1.0</real>
+    <key>LocationSimPort</key>
+    <integer>49152</integer>
+    <key>VpnFakeIP</key>
+    <string>10.7.0.1</string>
+    <key>VpnDeviceIP</key>
+    <string>10.7.0.0</string>
+    <key>VpnSubnetMask</key>
+    <string>255.255.255.0</string>
+</dict>
+</plist>

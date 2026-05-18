@@ -1,0 +1,4 @@
+# Placeholder for pre-built libidevice_ffi.a
+# Do NOT commit binary artifacts to git.
+# Build libidevice_ffi.a for arm64 (device) and arm64/x86_64 (simulator),
+# then place the universal/static library here.

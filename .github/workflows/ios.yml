@@ -1,0 +1,92 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: Cache Homebrew packages
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/Homebrew
+          key: ${{ runner.os }}-xcodegen-${{ hashFiles('project.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-xcodegen-
+
+      - name: Install xcodegen
+        run: |
+          if ! command -v xcodegen &> /dev/null; then
+            brew install xcodegen
+          fi
+
+      - name: Generate Xcode project
+        run: |
+          test -f project.yml || (echo "Missing project.yml"; exit 1)
+          xcodegen generate
+
+      - name: Build and Test
+        run: |
+          mkdir -p build
+          set -o pipefail
+          xcodebuild \
+            -scheme LocationSimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO \
+            build test \
+            | tee build/build-test.log
+
+      - name: Archive
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -scheme LocationSimulator \
+            -destination generic/platform=iOS \
+            -archivePath "$PWD/build/LocationSimulator.xcarchive" \
+            -configuration Release \
+            | tee build/archive.log
+
+      # NOTE: exportOptions.plist contains placeholder signing values.
+      # Replace YOUR_TEAM_ID, YOUR_APP_PROFILE, and YOUR_VPN_PROFILE with
+      # real values before archive/export will succeed on main.
+      - name: Export IPA
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -o pipefail
+          xcodebuild -exportArchive \
+            -archivePath "$PWD/build/LocationSimulator.xcarchive" \
+            -exportPath "$PWD/build/ipa" \
+            -exportOptionsPlist "$PWD/LocationSimulator/scripts/exportOptions.plist" \
+            | tee build/export.log
+
+      - name: Upload IPA and archive
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: LocationSimulator-artifacts
+          path: |
+            build/ipa/*.ipa
+            build/LocationSimulator.xcarchive
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcode-logs
+          path: build/*.log

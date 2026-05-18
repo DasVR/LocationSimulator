@@ -1,0 +1,21 @@
+# Xcode
+*.xcodeproj
+*.xcworkspace
+*.xcuserdata
+DerivedData/
+build/
+*.ipa
+*.dSYM
+
+# Secrets
+teamID.xcconfig
+*.mobileprovision
+*.p12
+rp_pairing_file.plist
+
+# macOS
+.DS_Store
+
+# Node / misc
+node_modules/
+*.log
