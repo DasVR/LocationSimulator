@@ -1,11 +1,14 @@
-# Xcode
-*.xcodeproj
-*.xcworkspace
-*.xcuserdata
+# Xcode - keep .xcodeproj for CI, ignore user data only
+*.xcworkspace/xcuserdata/
+*.xcuserdata/
 DerivedData/
 build/
 *.ipa
 *.dSYM
+
+# Keep the pre-generated .xcodeproj for CI builds
+# (individual subdirs like xcuserdata are ignored above)
+# LocationSimulator.xcodeproj/  <-- intentionally NOT ignored
 
 # Secrets
 teamID.xcconfig
@@ -22,3 +25,6 @@ node_modules/
 
 # Pre-built binaries (downloaded during setup)
 LocationSimulator/idevice/IDevice.xcframework/
+
+# Claude local plans
+.claude/
