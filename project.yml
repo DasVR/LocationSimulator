@@ -21,6 +21,8 @@ targets:
     settings:
       base:
         SWIFT_VERSION: "5.9"
+        PRODUCT_NAME: LocationSimulator
+        INFOPLIST_FILE: LocationSimulator/Info.plist
     dependencies:
       - sdk: SwiftUI.framework
       - sdk: MapKit.framework
@@ -37,8 +39,15 @@ targets:
     deploymentTarget: "17.4"
     sources:
       - path: LocationSimulator/VPN/PacketTunnelProvider.swift
+    resources:
+      - path: LocationSimulator/VPN/Info.plist
     entitlements:
       path: LocationSimulator/VPN/VPNExtension.entitlements
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_NAME: LocationSimulatorVPN
+        INFOPLIST_FILE: LocationSimulator/VPN/Info.plist
     dependencies:
       - sdk: NetworkExtension.framework
 
