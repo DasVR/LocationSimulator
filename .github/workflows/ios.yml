@@ -43,11 +43,15 @@ jobs:
           bash LocationSimulator/scripts/download-libidevice.sh
 
       - name: Generate Xcode project
+        id: generate
         run: |
-          # Use CI-specific project file (no VPN extension) to avoid xcodegen hang.
-          # The full project with VPN extension is in project.yml for local Xcode use.
+          # Use the CI-safe project file (no VPN extension — xcodegen hangs on it)
           cp project-ci.yml project.yml
+          test -f project.yml || (echo "Missing project.yml"; exit 1)
+
           xcodegen generate
+          echo "status=success" >> "$GITHUB_OUTPUT"
+
           echo "--- Generated project contents ---"
           ls -la LocationSimulator.xcodeproj/
 
