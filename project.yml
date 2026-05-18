@@ -1,54 +1,8 @@
 name: LocationSimulator
-createIntermediateGroups: true
-fileGroups:
-  - LocationSimulator/scripts
-
 targets:
   LocationSimulator:
     type: application
     platform: iOS
     deploymentTarget: "17.4"
     sources:
-      - path: LocationSimulator/App
-        group: App
-      - path: LocationSimulator/Views
-        group: Views
-      - path: LocationSimulator/ViewModels
-        group: ViewModels
-      - path: LocationSimulator/Models
-        group: Models
-      - path: LocationSimulator/Services
-        group: Services
-      - path: LocationSimulator/idevice
-        group: idevice
-    resources:
-      - path: LocationSimulator/Resources/Config.plist
-        group: Resources
-      - path: LocationSimulator/Info.plist
-        group: Resources
-    entitlements:
-      path: LocationSimulator/LocationSimulator.entitlements
-      group: Resources
-    settings:
-      base:
-        SWIFT_VERSION: "5.9"
-        LIBRARY_SEARCH_PATHS: "$(inherited) $(PROJECT_DIR)/LocationSimulator/idevice"
-        OTHER_LDFLAGS: "-lidevice"
-        SWIFT_INCLUDE_PATHS: "$(PROJECT_DIR)/LocationSimulator/idevice"
-    dependencies:
-      - sdk: SwiftUI.framework
-      - sdk: MapKit.framework
-      - sdk: CoreLocation.framework
-      - sdk: AVFoundation.framework
-      - sdk: NetworkExtension.framework
-      - sdk: UniformTypeIdentifiers.framework
-
-  LocationSimulatorTests:
-    type: bundle.unit-test
-    platform: iOS
-    deploymentTarget: "17.4"
-    sources:
-      - path: LocationSimulatorTests
-        group: LocationSimulatorTests
-    dependencies:
-      - target: LocationSimulator
+      - LocationSimulator
